@@ -1,0 +1,47 @@
+# Makefile to generate .wasm files from C++ sources
+
+# Compiler and flags
+CXX        = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS   = -Os -I/home/sally/lean4/build/release/stage1/include -I$ENV{HOME}/lean4/src -I$ENV{HOME}/lean4/build/release/stage1
+
+# Source directory (where the .cpp files are located)
+SRCDIR     = $ENV{HOME}/lean4/src/library
+
+# List of source files
+SOURCES = \
+    $(SRCDIR)/annotation.cpp \
+    $(SRCDIR)/aux_recursors.cpp \
+    $(SRCDIR)/bin_app.cpp \
+    $(SRCDIR)/class.cpp \
+    $(SRCDIR)/constants.cpp \
+    $(SRCDIR)/dynlib.cpp \
+    $(SRCDIR)/elab_environment.cpp \
+    $(SRCDIR)/expr_lt.cpp \
+    $(SRCDIR)/formatter.cpp \
+    $(SRCDIR)/init_module.cpp \
+    $(SRCDIR)/max_sharing.cpp \
+    $(SRCDIR)/module.cpp \
+    $(SRCDIR)/num.cpp \
+    $(SRCDIR)/print.cpp \
+    $(SRCDIR)/profiling.cpp \
+    $(SRCDIR)/projection.cpp \
+    $(SRCDIR)/reducible.cpp \
+    $(SRCDIR)/replace_visitor.cpp \
+    $(SRCDIR)/time_task.cpp \
+    $(SRCDIR)/util.cpp
+
+# Automatically derive the target .wasm files from the source files
+TARGETS = $(SOURCES:.cpp=.wasm)
+
+# Default target builds all wasm files
+all: $(TARGETS)
+
+# Pattern rule: for any .cpp file, generate the corresponding .wasm file
+$(SRCDIR)/%.wasm: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+# Clean up generated files
+clean:
+	rm -f $(TARGETS)
+
+.PHONY: all clean
