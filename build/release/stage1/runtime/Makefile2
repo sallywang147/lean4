@@ -1,0 +1,64 @@
+# Makefile_runtime_wasm: Compile runtime C++ files to WebAssembly modules
+
+# Define home directory
+HOME_DIR = /home/sally
+
+# Compiler and flags
+CXX      = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS = -Os -D_WASI_EMULATED_MMAN -include fstream \
+           -I$(HOME_DIR)/lean4/build/release/stage1/include \
+           -I$(HOME_DIR)/lean4/src \
+           -I$(HOME_DIR)/lean4/build/release/stage1
+
+# Source and output directories
+SRCDIR   = $(HOME_DIR)/lean4/src/runtime
+WASM_OUT = $(HOME_DIR)/lean4/build/release/stage1/runtime/CMakeFiles/wasm.dir
+
+# List of runtime source files
+SOURCES = \
+    $(SRCDIR)/alloc.cpp \
+    $(SRCDIR)/allocprof.cpp \
+    $(SRCDIR)/apply.cpp \
+    $(SRCDIR)/compact.cpp \
+    $(SRCDIR)/debug.cpp \
+    $(SRCDIR)/exception.cpp \
+    $(SRCDIR)/hash.cpp \
+    $(SRCDIR)/init_module.cpp \
+    $(SRCDIR)/interrupt.cpp \
+    $(SRCDIR)/io.cpp \
+    $(SRCDIR)/libuv.cpp \
+    $(SRCDIR)/memory.cpp \
+    $(SRCDIR)/mpn.cpp \
+    $(SRCDIR)/mpz.cpp \
+    $(SRCDIR)/mutex.cpp \
+    $(SRCDIR)/object.cpp \
+    $(SRCDIR)/object_ref.cpp \
+    $(SRCDIR)/platform.cpp \
+    $(SRCDIR)/process.cpp \
+    $(SRCDIR)/sharecommon.cpp \
+    $(SRCDIR)/stack_overflow.cpp \
+    $(SRCDIR)/stackinfo.cpp \
+    $(SRCDIR)/thread.cpp \
+    $(SRCDIR)/utf8.cpp \
+    $(SRCDIR)/uv/event_loop.cpp \
+    $(SRCDIR)/uv/net_addr.cpp \
+    $(SRCDIR)/uv/tcp.cpp \
+    $(SRCDIR)/uv/timer.cpp
+
+# Automatically derive the corresponding .wasm targets
+TARGETS = $(patsubst $(SRCDIR)/%.cpp,$(WASM_OUT)/%.wasm,$(SOURCES))
+
+# Default target: build all wasm files
+all: $(TARGETS)
+
+# Pattern rule: compile each .cpp file to its corresponding .wasm file.
+# The 'mkdir -p' ensures that subdirectories (e.g. uv/) are created as needed.
+$(WASM_OUT)/%.wasm: $(SRCDIR)/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+
+# Clean up all generated wasm files
+clean:
+	@rm -f $(TARGETS)
+
+.PHONY: all clean

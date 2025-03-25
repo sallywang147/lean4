@@ -1,0 +1,58 @@
+# Makefile_util_wasm: Compile util C++ files to WebAssembly modules
+
+# Define the home directory variable
+HOME_DIR = /home/sally
+
+# Compiler and flags
+CXX      = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS = -Os -D_WASI_EMULATED_MMAN -include fstream \
+           -I$(HOME_DIR)/lean4/build/release/stage1/include \
+           -I$(HOME_DIR)/lean4/src \
+           -I$(HOME_DIR)/lean4/build/release/stage1
+
+# Source directory for util C++ files
+SRCDIR   = $(HOME_DIR)/lean4/src/util
+
+# Output directory for the wasm files
+WASM_OUT = $(HOME_DIR)/lean4/build/release/stage1/util/CMakeFiles/wasm.dir
+
+# List of util source files
+SOURCES = \
+	$(SRCDIR)/ascii.cpp \
+	$(SRCDIR)/bit_tricks.cpp \
+	$(SRCDIR)/escaped.cpp \
+	$(SRCDIR)/ffi.cpp \
+	$(SRCDIR)/init_module.cpp \
+	$(SRCDIR)/kvmap.cpp \
+	$(SRCDIR)/lbool.cpp \
+	$(SRCDIR)/list_fn.cpp \
+	$(SRCDIR)/map_foreach.cpp \
+	$(SRCDIR)/name.cpp \
+	$(SRCDIR)/name_generator.cpp \
+	$(SRCDIR)/name_set.cpp \
+	$(SRCDIR)/option_declarations.cpp \
+	$(SRCDIR)/options.cpp \
+	$(SRCDIR)/path.cpp \
+	$(SRCDIR)/timeit.cpp \
+	$(SRCDIR)/timer.cpp
+
+# Automatically derive the corresponding .wasm targets
+TARGETS = $(patsubst $(SRCDIR)/%.cpp,$(WASM_OUT)/%.wasm,$(SOURCES))
+
+# Default target: build all wasm files
+all: $(TARGETS)
+
+# Ensure the output directory exists
+$(WASM_OUT):
+	@mkdir $(WASM_OUT)
+
+# Pattern rule: compile each .cpp file to its corresponding .wasm file
+$(WASM_OUT)/%.wasm: $(SRCDIR)/%.cpp | $(WASM_OUT)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+
+# Clean up all generated wasm files
+clean:
+	@rm -f $(TARGETS)
+
+.PHONY: all clean

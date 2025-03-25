@@ -1,0 +1,38 @@
+# Makefile_lean: Compile lean.cpp to WebAssembly
+
+# Define the home directory variable
+HOME_DIR = /home/sally
+
+# Compiler and flags
+CXX      = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS = -Os -D_WASI_EMULATED_MMAN -include fstream \
+           -I$(HOME_DIR)/lean4/build/release/stage1/include \
+           -I$(HOME_DIR)/lean4/src \
+           -I$(HOME_DIR)/lean4/build/release/stage1
+
+# Source directory for lean.cpp
+SRCDIR   = $(HOME_DIR)/lean4/src/shell
+
+# Output directory for the wasm file
+WASM_OUT = $(HOME_DIR)/lean4/build/release/stage1/shell/CMakeFiles/wasm.dir
+
+# Source file and target wasm file
+SOURCE   = $(SRCDIR)/lean.cpp
+TARGET   = $(WASM_OUT)/lean.wasm
+
+# Default target builds the wasm file
+all: $(TARGET)
+
+# Ensure the output directory exists
+$(WASM_OUT):
+	@mkdir $(WASM_OUT)
+
+# Rule: compile lean.cpp into lean.wasm
+$(TARGET): $(SOURCE) | $(WASM_OUT)
+	$(CXX) $(CXXFLAGS) $(SOURCE) -o $(TARGET) -lwasi-emulated-mman
+
+# Clean up the generated wasm file
+clean:
+	@rm -f $(TARGET)
+
+.PHONY: all clean
