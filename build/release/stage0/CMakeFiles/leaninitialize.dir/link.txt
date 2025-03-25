@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/temp/libleaninitialize.a initialize/CMakeFiles/initialize.dir/init.cpp.o
+/usr/bin/ranlib lib/temp/libleaninitialize.a

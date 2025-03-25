@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/temp/libleanshell.a CMakeFiles/leanshell.dir/util/shell.cpp.o
+/usr/bin/ranlib lib/temp/libleanshell.a
