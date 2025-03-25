@@ -1,11 +1,12 @@
 # Makefile to generate .wasm files from C++ sources
 
 # Compiler and flags
+
 CXX        = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
-CXXFLAGS   = -Os -I/home/sally/lean4/build/release/stage1/include -I$ENV{HOME}/lean4/src -I$ENV{HOME}/lean4/build/release/stage1
+CXXFLAGS   = -Os -I/home/sally/lean4/build/release/stage1/include -I/home/sally/lean4/src -I/home/sally/lean4/build/release/stage1
 
 # Source directory (where the .cpp files are located)
-SRCDIR     = $ENV{HOME}/lean4/src/library
+SRCDIR     = home/sally/lean4/src/library
 
 # List of source files
 SOURCES = \
