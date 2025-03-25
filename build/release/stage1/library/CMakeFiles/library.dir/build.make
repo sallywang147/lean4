@@ -35,97 +35,97 @@ include library/CMakeFiles/library.dir/flags.make
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX source to wasm /home/sally/lean4/src/library/max_sharing.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/max_sharing.cpp -o /home/sally/lean4/src/library/max_sharing.wasm
 
-/ home/sally/lean4/src/library/module.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/module.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/module.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX source to wasm /home/sally/lean4/src/library/module.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/module.cpp -o /home/sally/lean4/src/library/module.wasm
 
-/ home/sally/lean4/src/library/dynlib.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/dynlib.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/dynlib.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX source to wasm /home/sally/lean4/src/library/dynlib.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/dynlib.cpp -o /home/sally/lean4/src/library/dynlib.wasm
 
-/ home/sally/lean4/src/library/replace_visitor.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/replace_visitor.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/replace_visitor.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX source to wasm /home/sally/lean4/src/library/replace_visitor.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/replace_visitor.cpp -o /home/sally/lean4/src/library/replace_visitor.wasm
 
-/ home/sally/lean4/src/library/num.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/num.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/num.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX source to wasm /home/sally/lean4/src/library/num.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/num.cpp -o /home/sally/lean4/src/library/num.wasm
 
-/ home/sally/lean4/src/library/class.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/class.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/class.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX source to wasm /home/sally/lean4/src/library/class.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/class.cpp -o /home/sally/lean4/src/library/class.wasm
 
-/ home/sally/lean4/src/library/util.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/util.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/util.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX source to wasm /home/sally/lean4/src/library/util.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/util.cpp -o /home/sally/lean4/src/library/util.wasm
 
-/ home/sally/lean4/src/library/print.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/print.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/print.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX source to wasm /home/sally/lean4/src/library/print.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/print.cpp -o /home/sally/lean4/src/library/print.wasm
 
-/ home/sally/lean4/src/library/annotation.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/annotation.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/annotation.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX source to wasm /home/sally/lean4/src/library/annotation.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/annotation.cpp -o /home/sally/lean4/src/library/annotation.wasm
 
-/ home/sally/lean4/src/library/reducible.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/reducible.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/reducible.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX source to wasm /home/sally/lean4/src/library/reducible.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/reducible.cpp -o /home/sally/lean4/src/library/reducible.wasm
 
-/ home/sally/lean4/src/library/init_module.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/init_module.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/init_module.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX source to wasm /home/sally/lean4/src/library/init_module.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/init_module.cpp -o /home/sally/lean4/src/library/init_module.wasm
 
-/ home/sally/lean4/src/library/projection.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/projection.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/projection.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX source to wasm /home/sally/lean4/src/library/projection.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/projection.cpp -o /home/sally/lean4/src/library/projection.wasm
 
-/ home/sally/lean4/src/library/aux_recursors.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/aux_recursors.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/aux_recursors.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX source to wasm /home/sally/lean4/src/library/aux_recursors.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/aux_recursors.cpp -o /home/sally/lean4/src/library/aux_recursors.wasm
 
-/ home/sally/lean4/src/library/profiling.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/profiling.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/profiling.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX source to wasm /home/sally/lean4/src/library/profiling.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/profiling.cpp -o /home/sally/lean4/src/library/profiling.wasm
 
-/ home/sally/lean4/src/library/time_task.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/time_task.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/time_task.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX source to wasm /home/sally/lean4/src/library/time_task.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/time_task.cpp -o /home/sally/lean4/src/library/time_task.wasm
 
-/ home/sally/lean4/src/library/formatter.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/formatter.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/formatter.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX source to wasm /home/sally/lean4/src/library/formatter.wasm"
 	$(CLANGPP_COMMAND) -Os /home/sally/lean4/src/library/formatter.cpp -o /home/sally/lean4/src/library/formatter.wasm
 
-/ home/sally/lean4/src/library/elab_environment.wasm: library/CMakeFiles/library.dir/flags.make \
+/home/sally/lean4/src/library/elab_environment.wasm: library/CMakeFiles/library.dir/flags.make \
     /home/sally/lean4/src/library/elab_environment.cpp \
     library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=$(CMAKE_BINARY_DIR)/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX source to wasm /home/sally/lean4/src/library/elab_environment.wasm"
@@ -152,3 +152,17 @@ library: /home/sally/lean4/src/library/expr_lt.wasm \
          /home/sally/lean4/src/library/formatter.wasm \
          /home/sally/lean4/src/library/elab_environment.wasm
 .PHONY : library
+
+# Rule to build all files generated by this target.
+library/CMakeFiles/library.dir/build: library
+.PHONY : library/CMakeFiles/library.dir/build
+
+library/CMakeFiles/library.dir/clean:
+	cd /home/sally/lean4/build/release/stage1/library && $(CMAKE_COMMAND) -P CMakeFiles/library.dir/cmake_clean.cmake
+.PHONY : library/CMakeFiles/library.dir/clean
+
+# Add missing dependency target rule:
+library/CMakeFiles/library.dir/depend:
+	cd $(CMAKE_BINARY_DIR) && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" $(CMAKE_SOURCE_DIR) $(CMAKE_SOURCE_DIR)/library $(CMAKE_BINARY_DIR) $(CMAKE_BINARY_DIR)/library $(CMAKE_BINARY_DIR)/library/CMakeFiles/library.dir/DependInfo.cmake "--color=$(COLOR)"
+.PHONY: library/CMakeFiles/library.dir/depend
+
