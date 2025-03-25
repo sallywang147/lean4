@@ -67,7 +67,7 @@ include CMakeFiles/copy-cadical.dir/compiler_depend.make
 include CMakeFiles/copy-cadical.dir/progress.make
 
 CMakeFiles/copy-cadical:
-	cmake -E copy_if_different /home/sally/lean4/build/release/cadical/cadical /home/sally/lean4/build/release/stage1/bin/cadical
+	$(CMAKE_COMMAND) -E copy_if_different /home/sally/lean4/build/release/cadical/cadical /home/sally/lean4/build/release/stage1/bin/cadical
 
 copy-cadical: CMakeFiles/copy-cadical
 copy-cadical: CMakeFiles/copy-cadical.dir/build.make
