@@ -21,7 +21,8 @@ SOURCES = \
     $(SRCDIR)/formatter.cpp \
     $(SRCDIR)/init_module.cpp \
     $(SRCDIR)/max_sharing.cpp \
-    $(SRCDIR)/module.cpp \
+    #$(SRCDIR)/module.cpp \
+    
     $(SRCDIR)/num.cpp \
     $(SRCDIR)/print.cpp \
     $(SRCDIR)/profiling.cpp \
