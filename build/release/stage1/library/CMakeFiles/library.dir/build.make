@@ -73,7 +73,7 @@ library/CMakeFiles/library.dir/expr_lt.cpp.o: library/CMakeFiles/library.dir/fla
 library/CMakeFiles/library.dir/expr_lt.cpp.o: /home/sally/lean4/src/library/expr_lt.cpp
 library/CMakeFiles/library.dir/expr_lt.cpp.o: library/CMakeFiles/library.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/sally/lean4/build/release/stage1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object library/CMakeFiles/library.dir/expr_lt.cpp.o"
-	cd /home/sally/lean4/build/release/stage1/library && /usr/bin/ccache /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT library/CMakeFiles/library.dir/expr_lt.cpp.o -MF CMakeFiles/library.dir/expr_lt.cpp.o.d -o CMakeFiles/library.dir/expr_lt.cpp.o -c /home/sally/lean4/src/library/expr_lt.cpp
+	cd /home/sally/lean4/build/release/stage1/library && /usr/bin/ccache /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT library/CMakeFiles/library.dir/expr_lt.cpp.o -MF CMakeFiles/library.dir/expr_lt.cpp.o.d -o CMakeFiles/library.dir/expr_lt.cpp.o -c /home/sally/lean4/src/library/expr_lt.cpp && /usr/bin/ccache /usr/local/share/wasm-toolchain/sysroot/bin/clang++ --target=wasm32 -Os -s -o library/CMakeFiles/library.dir/expr_lt.cpp.wasm -c /home/sally/lean4/src/library/expr_lt.cpp
 
 library/CMakeFiles/library.dir/expr_lt.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/library.dir/expr_lt.cpp.i"
