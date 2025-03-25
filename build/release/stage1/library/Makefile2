@@ -3,7 +3,7 @@
 # Compiler and flags
 
 CXX        = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
-CXXFLAGS   = -Os -I/home/sally/lean4/build/release/stage1/include -I/home/sally/lean4/src -I/home/sally/lean4/build/release/stage1
+CXXFLAGS   = -Os -D_WASI_EMULATED_MMAN -I/home/sally/lean4/build/release/stage1/include -I/home/sally/lean4/src -I/home/sally/lean4/build/release/stage1
 
 # Source directory (where the .cpp files are located)
 SRCDIR     = /home/sally/lean4/src/library
@@ -39,7 +39,7 @@ all: $(TARGETS)
 
 # Pattern rule: for any .cpp file, generate the corresponding .wasm file
 $(SRCDIR)/%.wasm: $(SRCDIR)/%.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
 
 # Clean up generated files
 clean:
