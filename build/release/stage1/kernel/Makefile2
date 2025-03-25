@@ -1,0 +1,55 @@
+# Makefile_kernel: Generate .wasm files from kernel C++ sources
+
+# Define the home directory variable
+HOME_DIR = /home/sally
+
+# Compiler and flags
+CXX      = /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS = -Os -D_WASI_EMULATED_MMAN -include fstream -I$(HOME_DIR)/lean4/build/release/stage1/include -I$(HOME_DIR)/lean4/src -I$(HOME_DIR)/lean4/build/release/stage1
+
+# Source directory for kernel cpp files
+SRCDIR   = $(HOME_DIR)/lean4/src/kernel
+
+# Output directory for wasm files
+WASM_OUT = $(HOME_DIR)/lean4/build/release/stage1/kernel/CMakeFiles/wasm.dir
+
+# List of kernel source files
+SOURCES = \
+    $(SRCDIR)/abstract.cpp \
+    $(SRCDIR)/declaration.cpp \
+    $(SRCDIR)/environment.cpp \
+    $(SRCDIR)/equiv_manager.cpp \
+    $(SRCDIR)/expr.cpp \
+    $(SRCDIR)/expr_cache.cpp \
+    $(SRCDIR)/expr_eq_fn.cpp \
+    $(SRCDIR)/for_each_fn.cpp \
+    $(SRCDIR)/inductive.cpp \
+    $(SRCDIR)/init_module.cpp \
+    $(SRCDIR)/instantiate.cpp \
+    $(SRCDIR)/instantiate_mvars.cpp \
+    $(SRCDIR)/level.cpp \
+    $(SRCDIR)/local_ctx.cpp \
+    $(SRCDIR)/quot.cpp \
+    $(SRCDIR)/replace_fn.cpp \
+    $(SRCDIR)/trace.cpp \
+    $(SRCDIR)/type_checker.cpp
+
+# Automatically derive the target .wasm files from the source files
+TARGETS = $(patsubst $(SRCDIR)/%.cpp,$(WASM_OUT)/%.wasm,$(SOURCES))
+
+# Default target: build all wasm files
+all: $(TARGETS)
+
+# Ensure the output directory exists
+$(WASM_OUT):
+	mkdir -p $(WASM_OUT)
+
+# Pattern rule: compile each .cpp file to its corresponding .wasm file
+$(WASM_OUT)/%.wasm: $(SRCDIR)/%.cpp | $(WASM_OUT)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+
+# Clean target: remove all generated wasm files
+clean:
+	rm -f $(TARGETS)
+
+.PHONY: all clean
