@@ -3,8 +3,9 @@
 ### Steps: 
 1. We first build the lean4 source code to obtain intermediate Makefiles of [each bootstrapping stage](https://lean-lang.org/lean4/doc/dev/bootstrap.html)
 ```
-git clone https://github.com/leanprover/lean4
+git clone https://github.com/sallywang147/lean4.git
 cd lean4
+git checkout -b build
 cmake --preset release
 make -C build/release -j$(nproc || sysctl -n hw.logicalcpu)
 ```
