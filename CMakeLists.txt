@@ -31,7 +31,7 @@ if(NOT (DEFINED STAGE0_CMAKE_EXECUTABLE_SUFFIX))
 endif()
 
 # Don't do anything with cadical on wasm
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
+if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten" AND NOT ${CMAKE_SYSTEM_NAME} MATCHES "WASI")
   # On CI Linux, we source cadical from Nix instead; see flake.nix
   find_program(CADICAL cadical)
   if(NOT CADICAL)
@@ -77,6 +77,7 @@ ExternalProject_add(stage1
   SOURCE_SUBDIR src
   BINARY_DIR stage1
   CMAKE_ARGS -DSTAGE=1 -DPREV_STAGE=${CMAKE_BINARY_DIR}/stage0 -DPREV_STAGE_CMAKE_EXECUTABLE_SUFFIX=${STAGE0_CMAKE_EXECUTABLE_SUFFIX} ${CL_ARGS}
+  BUILD_COMMAND make make_stdlib
   BUILD_ALWAYS ON
   INSTALL_COMMAND ""
   DEPENDS stage0
