@@ -96,7 +96,7 @@ ifeq "Linux" "Windows"
 # "half-way point" DLL to avoid symbol limit
 # include Lean.Meta.WHNF and leancpp except for `initialize.cpp`
 	"/home/sally/lean4/build/release/stage1/leanc.sh" -shared -o /home/sally/lean4/build/release/stage1/lib/lean/libleanshared_1.so \
-	  ../build/release/stage1/lib/temp/Lean/Meta/WHNF.*o.export -Wl,--start-group ../build/release/stage1/lib/lean/libLean.a.export -Wl,--whole-archive ../build/release/stage1/lib/temp/libleancpp_1.a -Wl,--no-whole-archive -Wl,--end-group -lInit_shared -Wl,--out-implib,../build/release/stage1/lib/lean/libleanshared_1.dll.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG -Wl,-Map=../build/release/stage1/lib/temp/libleanshared_1.map
+	  ../build/release/stage1/lib/temp/Lean/Meta/WHNF.*wasm.export -Wl,--start-group ../build/release/stage1/lib/lean/libLean.a.export -Wl,--whole-archive ../build/release/stage1/lib/temp/libleancpp_1.a -Wl,--no-whole-archive -Wl,--end-group -lInit_shared -Wl,--out-implib,../build/release/stage1/lib/lean/libleanshared_1.dll.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG -Wl,-Map=../build/release/stage1/lib/temp/libleanshared_1.map
 # now delete included symbols from libLean.a
 	cp ../build/release/stage1/lib/lean/libLean.a.export ../build/release/stage1/lib/lean/diff.a
 	sed -En 's/.*\s(\S*\.o\.export):.*/\1/p' ../build/release/stage1/lib/temp/libleanshared_1.map > ../build/release/stage1/lib/temp/diff.a.in
@@ -112,10 +112,10 @@ else
 	"/home/sally/lean4/build/release/stage1/leanc.sh" -shared -o /home/sally/lean4/build/release/stage1/lib/lean/libleanshared_1.so ../build/release/stage1/lib/temp/empty.c   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG
 ifeq "Linux" "Darwin"
 	"/home/sally/lean4/build/release/stage1/leanc.sh" -shared -o $@ \
-	  ../build/release/stage1/lib/temp/Lean.*o.export -Wl,-force_load,../build/release/stage1/lib/temp/libleanshell.a -lInit -lStd -lLean -lleancpp /home/sally/lean4/build/release/stage1/runtime/libleanrt_initial-exec.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG
+	  ../build/release/stage1/lib/temp/Lean.*wasm.export -Wl,-force_load,../build/release/stage1/lib/temp/libleanshell.a -lInit -lStd -lLean -lleancpp /home/sally/lean4/build/release/stage1/runtime/libleanrt_initial-exec.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG
 else
 	"/home/sally/lean4/build/release/stage1/leanc.sh" -shared -o $@ \
-	  -Wl,--whole-archive ../build/release/stage1/lib/temp/Lean.*o.export ../build/release/stage1/lib/temp/libleanshell.a -Wl,--no-whole-archive -Wl,--start-group -lInit -lStd -lLean -lleancpp -Wl,--end-group /home/sally/lean4/build/release/stage1/runtime/libleanrt_initial-exec.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG
+	  -Wl,--whole-archive ../build/release/stage1/lib/temp/Lean.*wasm.export ../build/release/stage1/lib/temp/libleanshell.a -Wl,--no-whole-archive -Wl,--start-group -lInit -lStd -lLean -lleancpp -Wl,--end-group /home/sally/lean4/build/release/stage1/runtime/libleanrt_initial-exec.a   -lstdc++ -Wl,--gc-sections -Wl,-Bsymbolic -Wl,-rpath=\$$ORIGIN/..:\$$ORIGIN  -I/home/sally/lean4/build/release/stage1/include -O3 -DNDEBUG
 endif
 endif
 
@@ -130,7 +130,7 @@ leanshared: /home/sally/lean4/build/release/stage1/lib/lean/libleanshared.so
 
 libLake_shared: /home/sally/lean4/build/release/stage1/lib/lean/libLake_shared.so
 
-/home/sally/lean4/build/release/stage1/bin/lake: ../build/release/stage1/lib/temp/LakeMain.*o.export /home/sally/lean4/build/release/stage1/lib/lean/libLake_shared.so
+/home/sally/lean4/build/release/stage1/bin/lake: ../build/release/stage1/lib/temp/LakeMain.*wasm.export /home/sally/lean4/build/release/stage1/lib/lean/libLake_shared.so
 	@echo "[    ] Building $@"
 # on Windows, must remove file before writing a new one (since the old one may be in use)
 	@rm -f $@

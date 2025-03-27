@@ -7,7 +7,7 @@ for arg in "$@"; do
     [[ "$arg" = "-c" ]] && ldflags=()
     [[ "$arg" = "-v" ]] && v=1
 done
-cmd=(${LEAN_CC:-/usr/bin/cc} "-I$root/include"  -fstack-clash-protection -fwrapv -fPIC -fvisibility=hidden  "$@" "${ldflags[@]}" -Wno-unused-command-line-argument)
+cmd=(${LEAN_CC:/usr/local/share/wasm-toolchain/sysroot/bin/clang} "-I$root/include"  -Os  "$@" "${ldflags[@]}" -Wno-unused-command-line-argument)
 cmd=$(printf '%q ' "${cmd[@]}" | sed "s!ROOT!$root!g")
 [[ $v == 1 ]] && echo $cmd
 eval $cmd
