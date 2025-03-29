@@ -30,7 +30,6 @@ LIB_SOURCES := \
 	$(LIB_SRCDIR)/elab_environment.cpp \
 	$(LIB_SRCDIR)/expr_lt.cpp \
 	$(LIB_SRCDIR)/formatter.cpp \
-	$(LIB_SRCDIR)/init_module.cpp \
 	$(LIB_SRCDIR)/max_sharing.cpp \
 	$(LIB_SRCDIR)/num.cpp \
 	$(LIB_SRCDIR)/print.cpp \
@@ -53,7 +52,6 @@ RT_SOURCES := \
 	$(RT_SRCDIR)/debug.cpp \
 	$(RT_SRCDIR)/exception.cpp \
 	$(RT_SRCDIR)/hash.cpp \
-	$(RT_SRCDIR)/init_module.cpp \
 	$(RT_SRCDIR)/interrupt.cpp \
 	$(RT_SRCDIR)/io.cpp \
 	$(RT_SRCDIR)/libuv.cpp \
@@ -70,15 +68,11 @@ RT_SOURCES := \
 	$(RT_SRCDIR)/stackinfo.cpp \
 	$(RT_SRCDIR)/thread.cpp \
 	$(RT_SRCDIR)/utf8.cpp \
-	$(RT_SRCDIR)/uv/event_loop.cpp \
-	$(RT_SRCDIR)/uv/net_addr.cpp \
-	$(RT_SRCDIR)/uv/tcp.cpp \
-	$(RT_SRCDIR)/uv/timer.cpp
 RT_TARGETS := $(patsubst $(RT_SRCDIR)/%.cpp,$(RT_OUTDIR)/%.wasm,$(RT_SOURCES))
 
 # --- Lean Shell ---
-SHELL_SRC := $(HOME_DIR)/lean4/src/shell/lean.cpp
-SHELL_OUT := $(HOME_DIR)/lean4/build/release/stage1/shell/CMakeFiles/wasm.dir/lean.wasm
+#SHELL_SRC := $(HOME_DIR)/lean4/src/shell/lean.cpp
+#SHELL_OUT := $(HOME_DIR)/lean4/build/release/stage1/shell/CMakeFiles/wasm.dir/lean.wasm
 
 # --- Util ---
 UTIL_SRCDIR := $(HOME_DIR)/lean4/src/util
@@ -88,7 +82,6 @@ UTIL_SOURCES := \
 	$(UTIL_SRCDIR)/bit_tricks.cpp \
 	$(UTIL_SRCDIR)/escaped.cpp \
 	$(UTIL_SRCDIR)/ffi.cpp \
-	$(UTIL_SRCDIR)/init_module.cpp \
 	$(UTIL_SRCDIR)/kvmap.cpp \
 	$(UTIL_SRCDIR)/lbool.cpp \
 	$(UTIL_SRCDIR)/list_fn.cpp \
@@ -98,7 +91,6 @@ UTIL_SOURCES := \
 	$(UTIL_SRCDIR)/name_set.cpp \
 	$(UTIL_SRCDIR)/option_declarations.cpp \
 	$(UTIL_SRCDIR)/options.cpp \
-	$(UTIL_SRCDIR)/path.cpp \
 	$(UTIL_SRCDIR)/timeit.cpp \
 	$(UTIL_SRCDIR)/timer.cpp
 UTIL_TARGETS := $(patsubst $(UTIL_SRCDIR)/%.cpp,$(UTIL_OUTDIR)/%.wasm,$(UTIL_SOURCES))
@@ -149,11 +141,11 @@ $(INIT_OUT): $(INIT_SRC)
 	cp $@ $(CPPWASM_DIR)/$(notdir $@)
 
 # Special target: shell
-$(SHELL_OUT): $(SHELL_SRC)
-	@mkdir -p $(dir $@)
-	@mkdir -p $(CPPWASM_DIR)
-	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
-	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+#$(SHELL_OUT): $(SHELL_SRC)
+#	@mkdir -p $(dir $@)
+#	@mkdir -p $(CPPWASM_DIR)
+#	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+#	cp $@ $(CPPWASM_DIR)/$(notdir $@)
 
 # Flat .wasm outputs (library)
 %.wasm: %.cpp
