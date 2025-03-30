@@ -10,7 +10,7 @@ git checkout wasm
 make -f Makefile2
 make -f Makefile3
 ```
-The script above will generate two wasm libraries at the root of lean4: 1) [Makefile2](https://github.com/sallywang147/lean4/blob/wasm/Makefile2)  compiles to [WasmLib](https://github.com/sallywang147/lean4/tree/wasm/WasmLib): this compils the C code from [stage0's Stdlib](https://github.com/sallywang147/lean4/tree/wasm/stage0/stdlib); 2) [Makefile3](https://github.com/sallywang147/lean4/blob/wasm/Makefile3) compiles to [CppWasmLib](https://github.com/sallywang147/lean4/tree/wasm/CppWasmLib): this compiles the runtime Cpp code, such as kernel, runtime. library, initialize, etc in [stage0/stage1's src](https://github.com/sallywang147/lean4/tree/wasm/stage0/src). 
+The script above will generate two wasm libraries at the root of lean4: 1) [Makefile2](https://github.com/sallywang147/lean4/blob/wasm/Makefile2)  compiles to [WasmLib](https://github.com/sallywang147/lean4/tree/wasm/WasmLib): this compiles the C code from [stage0's Stdlib](https://github.com/sallywang147/lean4/tree/wasm/stage0/stdlib); 2) [Makefile3](https://github.com/sallywang147/lean4/blob/wasm/Makefile3) compiles to [CppWasmLib](https://github.com/sallywang147/lean4/tree/wasm/CppWasmLib): this compiles the runtime Cpp code, such as kernel, runtime. library, initialize, etc in [stage0/stage1's src](https://github.com/sallywang147/lean4/tree/wasm/stage0/src). 
 
 Note: since some cpp files, such as those started with uv are linked to the external library libuv, which we have yet to compile to wasm files, we exclude those limited number of cpp files in our Makefile3. 
 
