@@ -25,6 +25,9 @@ make -C build/release -j$(nproc || sysctl -n hw.logicalcpu)
 cd ~/lean4/build/release/stage0
 make -f MakeWasmfile
 ```
+Something like the following should appear: 
+<img width="1043" alt="Screen Shot 2025-03-29 at 10 32 13 PM" src="https://github.com/user-attachments/assets/4bd8a397-ab18-492b-95e4-0f6645b858a6" />
+
 Changes made to the existing buid system: 
 
 1. Instead of compiling to .o files, we adapted the targets in [lean.mk](https://github.com/sallywang147/lean4/blob/wasm/build/release/stage0/share/lean/lean.mk) at [line102](https://github.com/sallywang147/lean4/blob/bf3565b3fc0b9626417afa0b41ed79fe0dc06d1f/build/release/stage0/share/lean/lean.mk#L102) to [line110](https://github.com/sallywang147/lean4/blob/bf3565b3fc0b9626417afa0b41ed79fe0dc06d1f/build/release/stage0/share/lean/lean.mk#L110) to compile from c to wasm. 
