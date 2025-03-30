@@ -1,0 +1,156 @@
+# === Global Setup ===
+HOME_DIR := /home/sally
+CXX := /usr/local/share/wasm-toolchain/sysroot/bin/clang++
+CXXFLAGS := -Os -D_WASI_EMULATED_MMAN -include fstream \
+	-I$(HOME_DIR)/lean4/build/release/stage1/include \
+	-I$(HOME_DIR)/lean4/src \
+	-I$(HOME_DIR)/lean4/build/release/stage1
+
+# === Module Definitions ===
+
+# --- Init ---
+INIT_SRC := $(HOME_DIR)/lean4/src/initialize/init.cpp
+INIT_OUT := $(HOME_DIR)/lean4/build/release/stage1/initialize/CMakeFiles/wasm.dir/init.wasm
+
+# --- Kernel ---
+KERNEL_SRCDIR := $(HOME_DIR)/lean4/src/kernel
+KERNEL_OUTDIR := $(HOME_DIR)/lean4/build/release/stage1/kernel/CMakeFiles/wasm.dir
+KERNEL_SOURCES := $(wildcard $(KERNEL_SRCDIR)/*.cpp)
+KERNEL_TARGETS := $(patsubst $(KERNEL_SRCDIR)/%.cpp,$(KERNEL_OUTDIR)/%.wasm,$(KERNEL_SOURCES))
+
+# --- Library ---
+LIB_SRCDIR := $(HOME_DIR)/lean4/src/library
+LIB_SOURCES := \
+	$(LIB_SRCDIR)/annotation.cpp \
+	$(LIB_SRCDIR)/aux_recursors.cpp \
+	$(LIB_SRCDIR)/bin_app.cpp \
+	$(LIB_SRCDIR)/class.cpp \
+	$(LIB_SRCDIR)/constants.cpp \
+	$(LIB_SRCDIR)/dynlib.cpp \
+	$(LIB_SRCDIR)/elab_environment.cpp \
+	$(LIB_SRCDIR)/expr_lt.cpp \
+	$(LIB_SRCDIR)/formatter.cpp \
+	$(LIB_SRCDIR)/max_sharing.cpp \
+	$(LIB_SRCDIR)/num.cpp \
+	$(LIB_SRCDIR)/print.cpp \
+	$(LIB_SRCDIR)/profiling.cpp \
+	$(LIB_SRCDIR)/projection.cpp \
+	$(LIB_SRCDIR)/reducible.cpp \
+	$(LIB_SRCDIR)/replace_visitor.cpp \
+	$(LIB_SRCDIR)/time_task.cpp \
+	$(LIB_SRCDIR)/util.cpp
+LIB_TARGETS := $(LIB_SOURCES:.cpp=.wasm)
+
+# --- Runtime ---
+RT_SRCDIR := $(HOME_DIR)/lean4/src/runtime
+RT_OUTDIR := $(HOME_DIR)/lean4/build/release/stage1/runtime/CMakeFiles/wasm.dir
+RT_SOURCES := \
+	$(RT_SRCDIR)/alloc.cpp \
+	$(RT_SRCDIR)/allocprof.cpp \
+	$(RT_SRCDIR)/apply.cpp \
+	$(RT_SRCDIR)/compact.cpp \
+	$(RT_SRCDIR)/debug.cpp \
+	$(RT_SRCDIR)/exception.cpp \
+	$(RT_SRCDIR)/hash.cpp \
+	$(RT_SRCDIR)/interrupt.cpp \
+	$(RT_SRCDIR)/io.cpp \
+	$(RT_SRCDIR)/libuv.cpp \
+	$(RT_SRCDIR)/memory.cpp \
+	$(RT_SRCDIR)/mpn.cpp \
+	$(RT_SRCDIR)/mpz.cpp \
+	$(RT_SRCDIR)/mutex.cpp \
+	$(RT_SRCDIR)/object.cpp \
+	$(RT_SRCDIR)/object_ref.cpp \
+	$(RT_SRCDIR)/platform.cpp \
+	$(RT_SRCDIR)/process.cpp \
+	$(RT_SRCDIR)/sharecommon.cpp \
+	$(RT_SRCDIR)/stack_overflow.cpp \
+	$(RT_SRCDIR)/stackinfo.cpp \
+	$(RT_SRCDIR)/thread.cpp \
+RT_TARGETS := $(patsubst $(RT_SRCDIR)/%.cpp,$(RT_OUTDIR)/%.wasm,$(RT_SOURCES))
+
+UTIL_SRCDIR := $(HOME_DIR)/lean4/src/util
+UTIL_OUTDIR := $(HOME_DIR)/lean4/build/release/stage1/util/CMakeFiles/wasm.dir
+UTIL_SOURCES := \
+	$(UTIL_SRCDIR)/ascii.cpp \
+	$(UTIL_SRCDIR)/bit_tricks.cpp \
+	$(UTIL_SRCDIR)/escaped.cpp \
+	$(UTIL_SRCDIR)/ffi.cpp \
+	$(UTIL_SRCDIR)/init_module.cpp \
+	$(UTIL_SRCDIR)/kvmap.cpp \
+	$(UTIL_SRCDIR)/lbool.cpp \
+	$(UTIL_SRCDIR)/list_fn.cpp \
+	$(UTIL_SRCDIR)/map_foreach.cpp \
+	$(UTIL_SRCDIR)/name.cpp \
+	$(UTIL_SRCDIR)/name_generator.cpp \
+	$(UTIL_SRCDIR)/name_set.cpp \
+	$(UTIL_SRCDIR)/option_declarations.cpp \
+	$(UTIL_SRCDIR)/options.cpp \
+	$(UTIL_SRCDIR)/timeit.cpp \
+	$(UTIL_SRCDIR)/timer.cpp
+UTIL_TARGETS := $(patsubst $(UTIL_SRCDIR)/%.cpp,$(UTIL_OUTDIR)/%.wasm,$(UTIL_SOURCES))
+
+# === CppWasmLib output path ===
+CPPWASM_DIR := /home/sally/lean4/CppWasmLib
+
+# === All targets ===
+ALL_WASM := \
+        $(INIT_OUT) \
+        $(KERNEL_TARGETS) \
+        $(LIB_TARGETS) \
+        $(RT_TARGETS) \
+        $(UTIL_TARGETS)
+
+# === Build all
+all: $(ALL_WASM)
+
+# === Generic Rules ===
+
+# Pattern rule for kernel
+$(KERNEL_OUTDIR)/%.wasm: $(KERNEL_SRCDIR)/%.cpp
+	@mkdir -p $(dir $@)
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# Pattern rule for runtime
+$(RT_OUTDIR)/%.wasm: $(RT_SRCDIR)/%.cpp
+	@mkdir -p $(dir $@)
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# Pattern rule for util
+$(UTIL_OUTDIR)/%.wasm: $(UTIL_SRCDIR)/%.cpp
+	@mkdir -p $(dir $@)
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# Special target: init
+$(INIT_OUT): $(INIT_SRC)
+	@mkdir -p $(dir $@)
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# Special target: shell
+$(SHELL_OUT): $(SHELL_SRC)
+	@mkdir -p $(dir $@)
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# Flat .wasm outputs (library)
+%.wasm: %.cpp
+	@mkdir -p $(CPPWASM_DIR)
+	$(CXX) $(CXXFLAGS) $< -o $@ -lwasi-emulated-mman
+	cp $@ $(CPPWASM_DIR)/$(notdir $@)
+
+# === Clean ===
+clean:
+	@rm -f $(ALL_WASM)
+	@rm -f $(CPPWASM_DIR)/*.wasm
+
+.PHONY: all clean
+
