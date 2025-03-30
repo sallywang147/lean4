@@ -104,11 +104,8 @@ else
 $(TEMP_OUT)/%.wasm: $(C_OUT)/%.c
 endif
 ifdef CMAKE_LIKE_OUTPUT
-	@echo "[    ]Wasm  Building $<"
+	@echo "[    ]Wasm File Building $<"
 endif
-
-
-	@echo "--------------directory: $(shell echo $< | sed -E 's|.*//(.*)/[^/]+\.c|\1|; t; s|.*//([^/]+)\.c|\1|' )  ------------------------"
 	@mkdir -p "$(WASM_OUT)/$(shell echo $< | sed -E 's|.*//(.*)/[^/]+\.c|\1|; t; s|.*//([^/]+)\.c|\1|')"
 	@cd $(WASM_OUT)/$(shell echo $< | sed -E 's|.*//(.*)/[^/]+\.c|\1|; t; s|.*//([^/]+)\.c|\1|') && $(WASMC) -Os $< $(LEANC_OPTS) -o $(basename $(<F)).wasm
 
@@ -157,9 +154,9 @@ else
 $(LIB_OUT)/$(STATIC_LIB_NAME): $(NAT_OBJS) | $(LIB_OUT)
 	@rm -f $@
 # no response file support on macOS, but also no need for them
-	@$(LEAN_AR) rcs $@ $^
-$(LIB_OUT)/$(STATIC_LIB_NAME).export: $(LIB_OUT)/$(STATIC_LIB_NAME)
-	ln -f $< $@
+	#@$(LEAN_AR) rcs $@ $^
+#$(LIB_OUT)/$(STATIC_LIB_NAME).export: $(LIB_OUT)/$(STATIC_LIB_NAME)
+#	ln -f $< $@
 endif
 
 clean:
