@@ -1,26 +1,34 @@
-This is the repository for **Lean 4**.
+# Compiling Lean4 Source Code to Wasm Files: Two Ways 
 
-# About
+This informal readme documents two ways to compile lean4 C/Cpp source code to Wasm
 
-- [Quickstart](https://lean-lang.org/lean4/doc/quickstart.html)
-- [Homepage](https://lean-lang.org)
-- [Theorem Proving Tutorial](https://lean-lang.org/theorem_proving_in_lean4/)
-- [Functional Programming in Lean](https://lean-lang.org/functional_programming_in_lean/)
-- [Documentation Overview](https://lean-lang.org/lean4/doc/)
-- [Language Reference](https://lean-lang.org/doc/reference/latest/)
-- [Release notes](RELEASES.md) starting at v4.0.0-m3
-- [Examples](https://lean-lang.org/lean4/doc/examples.html)
-- [External Contribution Guidelines](CONTRIBUTING.md)
-- [FAQ](https://lean-lang.org/lean4/doc/faq.html)
+## First Way: Flattening All C/Cpp Source Code 
 
-# Installation
+```
+cd ~/lean4
+git checkout wasm
+make -f Makefile2
+make -f Makefile3
+```
+The script above will generate two wasm libraries at the root of lean4: 1) [Makefile2](https://github.com/sallywang147/lean4/blob/wasm/Makefile2)  compiles to [WasmLib](https://github.com/sallywang147/lean4/tree/wasm/WasmLib): this include the C code from [stage0's Stdlib](https://github.com/sallywang147/lean4/tree/wasm/stage0/stdlib); 2) [Makefile3](https://github.com/sallywang147/lean4/blob/wasm/Makefile3) compiles to [CppWasmLib](https://github.com/sallywang147/lean4/tree/wasm/CppWasmLib): this include the runtime Cpp code, such as kernel, runtime. library, initialize, etc in [stage0/stage1's src](https://github.com/sallywang147/lean4/tree/wasm/stage0/src). 
 
-See [Setting Up Lean](https://lean-lang.org/lean4/doc/setup.html).
+Note: since some cpp files, such as those started with uv are linked to the external library libuv, which we have yet to compile to wasm files, we exclude those limited number of cpp files in our Makefile3. 
 
-# Contributing
+## Second Way: Using existing build system 
 
-Please read our [Contribution Guidelines](CONTRIBUTING.md) first.
+Note: this will automatiacally compile the stdlib (C source code of lean4) to wasm files in [lean4/build/release/stage0/lib/wasm](https://github.com/sallywang147/lean4/tree/wasm/build/release/stage0/lib/wasm). 
+```
+git clone https://github.com/sallywang147/lean4.git
+git checkout wasm
+cmake --preset release
+make -C build/release -j$(nproc || sysctl -n hw.logicalcpu)
+cd ~/lean4/build/release/stage0
+make -f MakeWasmfile
+```
+Changes made to the existing buid system: 
 
-# Building from Source
+1. Instead of compiling to .o files, we adapted the targets in [lean.mk](https://github.com/sallywang147/lean4/blob/wasm/build/release/stage0/share/lean/lean.mk) at [line102](https://github.com/sallywang147/lean4/blob/bf3565b3fc0b9626417afa0b41ed79fe0dc06d1f/build/release/stage0/share/lean/lean.mk#L102) to [line110](https://github.com/sallywang147/lean4/blob/bf3565b3fc0b9626417afa0b41ed79fe0dc06d1f/build/release/stage0/share/lean/lean.mk#L110) to compile from c to wasm. 
 
-See [Building Lean](https://lean-lang.org/lean4/doc/make/index.html) (documentation source: [doc/make/index.md](doc/make/index.md)).
+2. Then we adpted the [original Makefile](https://github.com/sallywang147/lean4/blob/wasm/build/release/stage0/Makefile) at stage 0 to [MakeWasmfile](https://github.com/sallywang147/lean4/blob/wasm/build/release/stage0/MakeWasmfile) to compile only the C source code of our interests.
+
+3. Maybe we're also interested in the Cpp code here too, we can make similar changes in the build files to compile cpp code to wasm code
