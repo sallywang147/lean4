@@ -14,7 +14,7 @@ The script above will generate two wasm libraries at the root of lean4: 1) [Make
 
 Note: since some cpp files, such as those started with uv are linked to the external library libuv, which we have yet to compile to wasm files, we exclude those limited number of cpp files in our Makefile3. 
 
-## Second Way: Using existing build system 
+## Second Way: Leveraging existing build system 
 
 Note: this will automatiacally compile the stdlib (C source code of lean4) to wasm files in [lean4/build/release/stage0/lib/wasm](https://github.com/sallywang147/lean4/tree/wasm/build/release/stage0/lib/wasm). 
 ```
