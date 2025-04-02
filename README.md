@@ -1,8 +1,15 @@
-# Compiling Lean4 Source Code to Wasm Files: Two Ways 
+# Compiling Lean4 Source Code to Wasm Files: Three Ways 
 
 This informal readme documents two ways to compile lean4 C/Cpp source code to Wasm
 
-## First Way: Flattening All C/Cpp Source Code 
+## First Way: Adapting build Targets in CMakeList.txt 
+
+We change the target at [this line](https://github.com/sallywang147/lean4/blob/df8b4765456b2f10d368c3de86e1db034c2ed521/CMakeLists.txt#L80) and run
+`./build-for-wasm.sh`
+
+limitation: make_stb works, but if we also want runtime cpp files, clang19.0.0 in wasm-tools and C++14 required compilerrs do not seem compatible. On top of that, runtime Cpp library requires external libraries, such as libuv and libgmp, so we will need more engineering for runtime cpp if that's needed. 
+
+## Second Way: Flattening All C/Cpp Source Code 
 
 ```
 cd ~/lean4
